@@ -10,6 +10,9 @@ class Tree:
     def from_values(values: Sequence[Any]) -> Tree:
         return _tree_from_values(values)
 
+    def inverted(self) -> Tree:
+        return Tree(_invert_node(self.root))
+
     def __eq__(self, other: object) -> bool:
         return _node_eq(self.root, other.root)  # type: ignore
 
@@ -31,6 +34,14 @@ def _tree_from_values(values: Sequence[Any]) -> Tree:
         return node
 
     return Tree(gen_node(0))
+
+
+def _invert_node(node: Node | None) -> Node:
+    if not node:
+        return None
+
+    node.left, node.right = _invert_node(node.right), _invert_node(node.left)
+    return node
 
 
 def _node_eq(node: Node | None, other: Node | None) -> bool:
