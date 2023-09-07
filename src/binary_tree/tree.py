@@ -53,7 +53,9 @@ def _compare_nodes_eq(node: Node | None, other: Node | None) -> bool:
     if node.value != other.value:
         return False
 
-    return _compare_nodes_eq(node.left, other.left) and _compare_nodes_eq(node.right, other.right)
+    return _compare_nodes_eq(node.left, other.left) and _compare_nodes_eq(
+        node.right, other.right
+    )
 
 
 # TODO(cnpryer): Draw
