@@ -12,3 +12,9 @@ def test_tree_inverted() -> None:
     values = [1, 2, 3, 5]
     tree = Tree.from_values(values).inverted()
     assert_tree_values(tree, [1, 3, 2, None, None, None, 5])
+
+
+def test_tree_height() -> None:
+    values = [1, 2, 3, None, None, None, 3]
+    tree = Tree.from_values(values)
+    assert tree.height == 3, tree.height

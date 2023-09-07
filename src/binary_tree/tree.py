@@ -1,10 +1,12 @@
 from __future__ import annotations
+from collections import deque
 from typing import Any, Sequence
 
 
 class Tree:
     def __init__(self, root: Node | None = None) -> None:
-        self.root = root or Node()
+        self.root = root
+        self.height = 0 if not self.root else _height_from_node(self.root)
 
     @staticmethod
     def from_values(values: Sequence[Any]) -> Tree:
@@ -44,6 +46,21 @@ def _invert_node(node: Node | None) -> Node | None:
 
     node.left, node.right = _invert_node(node.right), _invert_node(node.left)
     return node
+
+
+def _height_from_node(node: Node | None) -> int:
+    if not node:
+        return 0
+    queue, height = deque([node]), 0
+    while queue:
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        height += 1
+    return height
 
 
 def _compare_nodes_eq(node: Node | None, other: Node | None) -> bool:
