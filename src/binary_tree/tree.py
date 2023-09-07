@@ -13,7 +13,8 @@ class Tree:
         return _tree_from_values(values) or Tree()
 
     def inverted(self) -> Tree:
-        return Tree(_invert_node(self.root))
+        self.root = _invert_node(self.root)
+        return self
 
     def __eq__(self, other: object) -> bool:
         if not hasattr(other, "root"):
