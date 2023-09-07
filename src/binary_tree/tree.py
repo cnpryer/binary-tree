@@ -14,7 +14,7 @@ class Tree:
         return Tree(_invert_node(self.root))
 
     def __eq__(self, other: object) -> bool:
-        return _node_eq(self.root, other.root)  # type: ignore
+        return _compare_nodes_eq(self.root, other.root)  # type: ignore
 
     def __str__(self) -> str:
         return _node_to_string(self.root)
@@ -44,7 +44,7 @@ def _invert_node(node: Node | None) -> Node:
     return node
 
 
-def _node_eq(node: Node | None, other: Node | None) -> bool:
+def _compare_nodes_eq(node: Node | None, other: Node | None) -> bool:
     if not node and not other:
         return True
     if not node or not other:
@@ -53,7 +53,7 @@ def _node_eq(node: Node | None, other: Node | None) -> bool:
     if node.value != other.value:
         return False
 
-    return _node_eq(node.left, other.left) and _node_eq(node.right, other.right)
+    return _compare_nodes_eq(node.left, other.left) and _compare_nodes_eq(node.right, other.right)
 
 
 # TODO(cnpryer): Draw
