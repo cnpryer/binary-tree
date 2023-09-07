@@ -8,23 +8,25 @@ class Tree:
 
     @staticmethod
     def from_values(values: Sequence[Any]) -> Tree:
-        return _tree_from_values(values)
+        return _tree_from_values(values) or Tree()
 
     def inverted(self) -> Tree:
         return Tree(_invert_node(self.root))
 
     def __eq__(self, other: object) -> bool:
-        return _compare_nodes_eq(self.root, other.root)  # type: ignore
+        if not hasattr(other, "root"):
+            return False
+        return _compare_nodes_eq(self.root, other.root)
 
     def __str__(self) -> str:
         return _node_to_string(self.root)
 
 
-def _tree_from_values(values: Sequence[Any]) -> Tree:
+def _tree_from_values(values: Sequence[Any]) -> Tree | None:
     if not values:
         return None
 
-    def gen_node(pos: int) -> Node:
+    def gen_node(pos: int) -> Node | None:
         if len(values) <= pos or values[pos] is None:
             return None
 
@@ -36,7 +38,7 @@ def _tree_from_values(values: Sequence[Any]) -> Tree:
     return Tree(gen_node(0))
 
 
-def _invert_node(node: Node | None) -> Node:
+def _invert_node(node: Node | None) -> Node | None:
     if not node:
         return None
 
