@@ -103,6 +103,10 @@ jobs:
       - name: Install testing tools
         run: |
           pip install pytest
+
+      - name: Install project
+        run: |
+          pip install -e .
         
       - name: Run lints
         run: |
