@@ -11,7 +11,7 @@ def test_node_eq() -> None:
     assert node1 != node2, f"{node1} == {node2}"
 
 
-def test_tree_inverted() -> None:
+def test_node_inverted() -> None:
     node = Node(1, left=Node(2), right=Node(3)).inverted()
     assert node, None
     assert node.left, None
