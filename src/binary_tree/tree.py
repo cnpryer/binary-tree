@@ -24,6 +24,8 @@ class Tree:
         return self
 
     def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Tree):
+            return False
         return self.root == other.root
 
     def __str__(self) -> str:
