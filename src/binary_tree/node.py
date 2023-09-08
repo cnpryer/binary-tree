@@ -61,7 +61,7 @@ def _node_to_string(node: Node | None) -> str:
     return result
 
 
-def node_is_balanced(node: Node) -> bool:
+def node_is_balanced(node: Node | None) -> bool:
     def gen_height(node: Node | None) -> int:
         if not node:
             return 0
