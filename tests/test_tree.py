@@ -2,6 +2,16 @@ from binary_tree import Tree, node_is_balanced
 from binary_tree.utils import assert_tree_values
 
 
+def test_tree_eq() -> None:
+    tree1 = Tree.from_values([1, 2, 3, 5])
+    tree2 = Tree.from_values([1, 2, 3, 5])
+    assert tree1 == tree2, f"{tree1} != {tree2}"
+
+    tree1 = Tree.from_values([1, 2, 3, None])
+    tree2 = Tree.from_values([1, 2, 3, 5])
+    assert tree1 != tree2, f"{tree1} == {tree2}"
+
+
 def test_tree_from_values() -> None:
     values = [1, 2, 3, 5]
     tree = Tree.from_values(values)

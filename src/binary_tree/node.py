@@ -12,6 +12,17 @@ class Node:
         self.left = left
         self.right = right
 
+    def inverted(self) -> Node | None:
+        return _invert_node(self)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Node):
+            return False
+        return _compare_nodes_eq(self, other)
+
+    def __str__(self) -> str:
+        return _node_to_string(self)
+
 
 def _invert_node(node: Node | None) -> Node | None:
     if not node:
