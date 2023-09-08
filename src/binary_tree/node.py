@@ -58,3 +58,24 @@ def _node_to_string(node: Node | None) -> str:
         result += f"[{_node_to_string(node.left)}, {_node_to_string(node.right)}]"
 
     return result
+
+
+def node_is_balanced(node: Node) -> bool:
+    def gen_height(node: Node | None) -> int:
+        if not node:
+            return 0
+
+        left_height = gen_height(node.left)
+        if left_height < 0:
+            return -1
+
+        right_height = gen_height(node.right)
+        if right_height < 0:
+            return -1
+
+        if abs(left_height - right_height) > 1:
+            return -1
+
+        return 1 + max(left_height, right_height)
+
+    return gen_height(node) > 0

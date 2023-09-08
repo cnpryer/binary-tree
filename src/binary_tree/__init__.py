@@ -1,9 +1,10 @@
 from binary_tree.tree import Tree
-from binary_tree.node import Node
+from binary_tree.node import Node, node_is_balanced
 from binary_tree import utils
 
 __all__ = [
+    "Tree",
     "Node",
     "utils",
-    "Tree",
+    "node_is_balanced",
 ]
