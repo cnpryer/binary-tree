@@ -1,3 +1,4 @@
+# TODO(cnpryer): Eliminate configuration redundancy
 name: ci
 
 on:
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/ci.yaml'
 
 jobs:
-  default:
+  Format:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,20 +38,78 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
 
-      - name: Setup environment
+      - name: Install formatting tools
         run: |
-          cargo install --git https://github.com/mitsuhiko/rye
-          rye sync -f
+          pip install ruff black
 
-      - name: Run fmt check
+      - name: Run fmt
         run: |
-          rye run black . --check
+          ruff . --select I
+          black . --check
+
+  Lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Use Cargo to install rye
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Setup python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Install linting tools
+        run: |
+          pip install ruff mypy
         
-      - name: Run lint
+      - name: Run lints
         run: |
-          rye run mypy .
-          rye run ruff .
+          ruff .
+          mypy .
 
-      - name: Run tests
+  Test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Use Cargo to install rye
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Setup python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Install testing tools
         run: |
-          rye run pytest -v
+          pip install pytest
+
+      - name: Install project
+        run: |
+          pip install -e .
+        
+      - name: Run lints
+        run: |
+          pytest . -v
+
+

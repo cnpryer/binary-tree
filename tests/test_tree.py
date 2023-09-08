@@ -1,5 +1,4 @@
-from binary_tree import Tree
-from binary_tree import node_is_balanced
+from binary_tree import Tree, node_is_balanced
 from binary_tree.utils import assert_tree_values
 
 
