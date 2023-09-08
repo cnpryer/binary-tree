@@ -1,6 +1,6 @@
 from typing import Any, Sequence
 
-from binary_tree import Tree
+from binary_tree.tree import Tree
 
 
 def assert_tree_values(tree: Tree, values: Sequence[Any]) -> None:
