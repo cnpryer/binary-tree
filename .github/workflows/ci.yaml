@@ -26,14 +26,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Use Cargo to install rye
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: stable
-      - uses: Swatinem/rust-cache@v2
-
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -57,14 +51,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Use Cargo to install rye
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: stable
-      - uses: Swatinem/rust-cache@v2
-
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -88,14 +76,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Use Cargo to install rye
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: stable
-      - uses: Swatinem/rust-cache@v2
-
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -108,7 +90,7 @@ jobs:
         run: |
           pip install -e .
         
-      - name: Run lints
+      - name: Run tests
         run: |
           pytest . -v
 
