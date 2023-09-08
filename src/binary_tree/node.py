@@ -35,7 +35,7 @@ def _invert_node(node: Node | None) -> Node | None:
 def _height_from_node(node: Node | None) -> int:
     if not node:
         return 0
-    
+
     queue, height = deque([node]), 0
     while queue:
         for _ in range(len(queue)):

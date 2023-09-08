@@ -38,7 +38,8 @@ jobs:
 
       - name: Run fmt
         run: |
-          black . --diff
+          ruff . --select I
+          black . --check
 
   Lint:
     runs-on: ubuntu-latest
