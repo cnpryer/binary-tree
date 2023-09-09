@@ -12,10 +12,13 @@ def test_node_eq() -> None:
 
 
 def test_node_inverted() -> None:
-    node = Node(1, left=Node(2), right=Node(3)).inverted()
-    assert node, None
-    assert node.left, None
-    assert node.right, None
-    assert node.value == 1, node.value
-    assert node.left.value == 3, node.left.value
-    assert node.right.value == 2, node.right.value
+    node = Node(1, left=Node(2), right=Node(3))
+    original = node.clone()
+    inverted = node.inverted()
+    assert node == original, f"{node} != {original}"
+    assert inverted, None
+    assert inverted.left, None
+    assert inverted.right, None
+    assert inverted.value == 1, inverted.value
+    assert inverted.left.value == 3, inverted.left.value
+    assert inverted.right.value == 2, inverted.right.value

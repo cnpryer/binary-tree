@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import deque
+from copy import copy
 from typing import Any
 
 
@@ -12,8 +13,18 @@ class Node:
         self.left = left
         self.right = right
 
-    def inverted(self) -> Node | None:
+    def inverted(self, allow_copy: bool = True) -> Node | None:
+        if allow_copy:
+            return _invert_node(self.clone())
         return _invert_node(self)
+
+    def clone(self) -> Node:
+        node = Node(value=copy(self.value))
+        if self.left:
+            node.left = self.left.clone()
+        if self.right:
+            node.right = self.right.clone()
+        return node
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Node):
