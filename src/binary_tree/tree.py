@@ -20,9 +20,11 @@ class Tree:
     def inverted(self, allow_copy: bool = True) -> Tree:
         if not self.root:
             return self
+
         if allow_copy:
-            return Tree(self.root.inverted(allow_copy=allow_copy))
-        self.root = self.root.inverted()
+            return Tree(self.root.inverted(allow_copy=True))
+
+        self.root = self.root.inverted(allow_copy=False)
         return self
 
     def clone(self) -> Tree:
