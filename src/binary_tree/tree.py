@@ -26,10 +26,9 @@ class Tree:
         return self
 
     def clone(self) -> Tree:
-        tree = Tree()
-        if self.root:
-            tree.root = self.root.clone()
-        return tree
+        if not self.root:
+            return Tree()
+        return Tree(self.root.clone())
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Tree):
