@@ -20,8 +20,10 @@ def test_tree_from_values() -> None:
 
 def test_tree_inverted() -> None:
     values = [1, 2, 3, 5]
-    tree = Tree.from_values(values).inverted()
-    assert_tree_values(tree, [1, 3, 2, None, None, None, 5])
+    tree = Tree.from_values(values)
+    inverted = tree.inverted()
+    assert_tree_values(tree, [1, 2, 3, 5])
+    assert_tree_values(inverted, [1, 3, 2, None, None, None, 5])
 
 
 def test_tree_height() -> None:

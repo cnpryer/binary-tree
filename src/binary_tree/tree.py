@@ -17,11 +17,19 @@ class Tree:
     def from_values(values: Sequence[Any]) -> Tree:
         return _tree_from_values(values) or Tree()
 
-    def inverted(self) -> Tree:
+    def inverted(self, allow_copy: bool = True) -> Tree:
         if not self.root:
             return self
+        if allow_copy:
+            return Tree(self.root.inverted(allow_copy=allow_copy))
         self.root = self.root.inverted()
         return self
+
+    def clone(self) -> Tree:
+        tree = Tree()
+        if self.root:
+            tree.root = self.root.clone()
+        return tree
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Tree):
